@@ -7,6 +7,7 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
+//functional component
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
   const getDisplayedPages = () => {
     const maxVisiblePages = 5;

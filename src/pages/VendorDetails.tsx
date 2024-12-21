@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import Pagination from "../components/Pagination"; // Assuming you have a reusable Pagination component
+import Pagination from "../components/Pagination";
+import SalesGraph from "../components/SalesGraph";
 import VendorDetailsGrid from "../components/VendorDetailsGrid";
 import { PaginationType } from "../types/interfaces";
 import { orders } from "../urls";
@@ -75,13 +76,20 @@ const VendorDetails: React.FC = () => {
   return (
     <Box sx={{ padding: { xs: 2, md: 4 } }}>
       <Header title={"Vendor Details"} />
-      <VendorDetailsGrid vendorDetails={data} loading={loading} />
-
-      <Pagination
-        currentPage={pagination.currentPage}
-        totalPages={pagination.totalPages}
-        onPageChange={handlePageChange}
-      />
+      <Box sx={{ display: "flex", gap: 2 }}>
+        <Box sx={{ flex: 1 }}>
+          {" "}
+          <SalesGraph />
+        </Box>
+        <Box sx={{ flex: 1.25 }}>
+          <VendorDetailsGrid vendorDetails={data} loading={loading} />
+          <Pagination
+            currentPage={pagination.currentPage}
+            totalPages={pagination.totalPages}
+            onPageChange={handlePageChange}
+          />
+        </Box>
+      </Box>
     </Box>
   );
 };
