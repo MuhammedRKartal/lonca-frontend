@@ -66,24 +66,24 @@ const VendorDetails: React.FC = () => {
   };
 
   return (
-    <Box sx={{ padding: { xs: 2, md: 4 } }}>
-      <Header title={"Vendor Details"} />
+    <Box sx={{ padding: { xs: 2, md: 4 }, maxWidth: "100%" }}>
+      <Header title={`Vendor: ${vendorName} Details`} />
       <Box
         sx={{
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           gap: 2,
-          alignItems: { xs: "flex-start", md: "center" },
+          alignItems: { xs: "flex-start" },
         }}
       >
         <Box
           sx={{
             flex: 1,
-            mb: { xs: 2, md: 24 },
+            mb: { xs: 2, md: 10 },
             width: "100%",
           }}
         >
-          <SalesGraph vendorName={vendorName} year="2023" />
+          <SalesGraph vendorName={vendorName} initialYear="2023" />
         </Box>
         <Box
           sx={{

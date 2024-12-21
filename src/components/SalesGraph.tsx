@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { Box, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 import {
   BarElement,
   CategoryScale,
@@ -16,12 +17,15 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 interface SalesGraphProps {
   vendorName: string;
-  year: string;
+  initialYear?: string;
 }
 
-const SalesGraph = ({ vendorName, year }: SalesGraphProps) => {
+const SalesGraph = ({ vendorName, initialYear }: SalesGraphProps) => {
   const navigate = useNavigate();
+  const currentYear = new Date().getFullYear();
   const [chartData, setChartData] = useState<{ month: string; totalQuantitySold: number }[]>([]);
+  const [year, setYear] = useState(initialYear || currentYear.toString());
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const fetchChartData = useCallback(async () => {
     try {
@@ -33,10 +37,12 @@ const SalesGraph = ({ vendorName, year }: SalesGraphProps) => {
         const data = await response.json();
 
         setChartData(data);
+        setErrorMessage(null);
       } else {
         const error = await response.json();
 
-        navigate("/error", { state: { code: error.code, message: error.message } });
+        setChartData([]);
+        setErrorMessage(error.message || "An error occurred while fetching the data.");
       }
     } catch {
       navigate("/error", { state: { message: "An unexpected error occurred." } });
@@ -46,6 +52,10 @@ const SalesGraph = ({ vendorName, year }: SalesGraphProps) => {
   useEffect(() => {
     fetchChartData();
   }, [fetchChartData]);
+
+  const handleYearChange = (event: SelectChangeEvent<string>) => {
+    setYear(event.target.value);
+  };
 
   const chartOptions = {
     responsive: true,
@@ -68,7 +78,38 @@ const SalesGraph = ({ vendorName, year }: SalesGraphProps) => {
     ],
   };
 
-  return <Bar data={data} options={chartOptions} />;
+  const yearOptions = Array.from({ length: 5 }, (_, i) => (currentYear - i).toString());
+
+  return (
+    <div>
+      <Bar data={data} options={chartOptions} />
+      <Box mt={3} display="flex" flexDirection="column" alignItems="center">
+        {errorMessage && (
+          <Typography color="error" variant="body2" gutterBottom>
+            {errorMessage}
+          </Typography>
+        )}
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <Typography variant="body1" sx={{ mr: 2 }}>
+            Select Year:
+          </Typography>
+          <Select
+            value={year}
+            onChange={handleYearChange}
+            variant="outlined"
+            size="small"
+            sx={{ minWidth: 120 }}
+          >
+            {yearOptions.map(yearOption => (
+              <MenuItem key={yearOption} value={yearOption}>
+                {yearOption}
+              </MenuItem>
+            ))}
+          </Select>
+        </Box>
+      </Box>
+    </div>
+  );
 };
 
 export default React.memo(SalesGraph);
