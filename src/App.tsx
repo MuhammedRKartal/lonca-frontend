@@ -3,24 +3,20 @@ import { Box } from "@mui/material";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Pagination from "./components/Pagination";
 import VendorsGrid from "./components/VendorsGrid";
+import { VendorType } from "./types";
 import { PaginationType } from "./types/interfaces";
 import { vendors } from "./urls";
 import Header from "./views/layout/Header";
 
-interface Vendor {
-  id: string;
-  name: string;
-}
-
 interface VendorsResponse {
-  vendors: Vendor[];
+  vendors: VendorType[];
   pagination: PaginationType;
 }
 
 const App: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [vendorData, setVendorData] = useState<Vendor[]>([]);
+  const [vendorData, setVendorData] = useState<VendorType[]>([]);
   const [pagination, setPagination] = useState<PaginationType>({
     currentPage: 1,
     totalPages: 1,
@@ -43,8 +39,7 @@ const App: React.FC = () => {
 
           navigate("/error", { state: { code: error.code, message: error.message } });
         }
-      } catch (error) {
-        console.error("Error fetching vendors:", error);
+      } catch {
         navigate("/error", { state: { message: "An unexpected error occurred." } });
       }
     },

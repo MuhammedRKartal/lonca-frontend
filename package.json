@@ -17,7 +17,9 @@
     "@mui/material": "^6.2.1",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
+    "chart.js": "^4.4.7",
     "react": "^19.0.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.0",
     "typescript": "^5.7.2"

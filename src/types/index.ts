@@ -1,5 +1,5 @@
 export type VendorType = {
-  id: string;
+  _id: string;
   name: string;
 };
 

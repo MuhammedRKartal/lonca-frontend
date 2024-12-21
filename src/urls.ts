@@ -5,7 +5,7 @@ export const vendors = {
 export const orders = {
   getTotalProductsInfoSoldByVendor: (vendorName: string) => `/orders/${vendorName}`,
   getMonthlySellingRatesByVendor: (vendorName: string, year: string) =>
-    `/orders/${vendorName}/${year}`,
+    `/orders/monthly/${vendorName}/${year}`,
 };
 
 const URLS = {
