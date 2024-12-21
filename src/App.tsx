@@ -5,11 +5,11 @@ import Pagination from "./components/Pagination";
 import VendorsGrid from "./components/VendorsGrid";
 import { PaginationType } from "./types/interfaces";
 import { vendors } from "./urls";
+import Header from "./views/layout/Header";
 
 interface Vendor {
   id: string;
   name: string;
-  // Add other vendor-specific fields here
 }
 
 interface VendorsResponse {
@@ -31,7 +31,7 @@ const App: React.FC = () => {
     async (page: number) => {
       try {
         const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
-        const response = await fetch(`${backendUrl}${vendors.getAllVendors}?page=${page}&limit=16`);
+        const response = await fetch(`${backendUrl}${vendors.getAllVendors}?page=${page}&limit=23`);
 
         if (response.ok) {
           const data: VendorsResponse = await response.json();
@@ -64,6 +64,8 @@ const App: React.FC = () => {
 
   return (
     <Box sx={{ padding: { xs: 2, md: 4 } }}>
+      <Header title={"Vendors List"} />
+
       <VendorsGrid vendors={vendorData} />
       <Pagination
         currentPage={pagination.currentPage}

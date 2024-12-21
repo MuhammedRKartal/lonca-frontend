@@ -49,6 +49,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
   return (
     <Box display="flex" justifyContent="center" alignItems="center" gap={1} mt={2}>
       <Button
+        color="success"
         sx={{ minWidth: 0 }}
         variant="text"
         onClick={() => onPageChange(currentPage - 1)}
@@ -59,6 +60,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
 
       {displayedPages.map((page, index) => (
         <Button
+          color="success"
           sx={{
             minWidth: "0",
             px: typeof page !== "number" ? "0px" : 1,
@@ -75,6 +77,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
       ))}
 
       <Button
+        color="success"
         sx={{ minWidth: 0 }}
         variant="text"
         onClick={() => onPageChange(currentPage + 1)}

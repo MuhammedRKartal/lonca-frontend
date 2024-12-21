@@ -33,7 +33,7 @@ const VendorsGrid = ({ vendors }: VendorProps) => {
           {vendors?.map((vendor: VendorType) => (
             <TableRow key={vendor?.id} sx={{ py: 1 }}>
               <TableCell sx={{ py: 1 }}> {vendor?.name}</TableCell>
-              <TableCell sx={{ textAlign: "right", py: 1 }}>
+              <TableCell sx={{ textAlign: "right", py: 1, pr: 4 }}>
                 <IconButton onClick={() => navigate(`/vendors/${vendor?.name}`)} size="small">
                   <Visibility fontSize="small" />
                 </IconButton>
