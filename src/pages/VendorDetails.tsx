@@ -14,7 +14,7 @@ interface VendorDetailsResponse {
   pagination: PaginationType;
 }
 
-const VendorDetails: React.FC = () => {
+const VendorDetails = () => {
   const { vendorName } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -31,6 +31,7 @@ const VendorDetails: React.FC = () => {
     async (page: number) => {
       try {
         setLoading(true);
+
         const response = await fetch(
           `${process.env.REACT_APP_BACKEND_URL}${orders.getTotalProductsInfoSoldByVendor(vendorName)}?page=${page}&limit=19`
         );

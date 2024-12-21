@@ -78,7 +78,7 @@ const SalesGraph = ({ vendorName, initialYear }: SalesGraphProps) => {
     ],
   };
 
-  const yearOptions = Array.from({ length: 5 }, (_, i) => (currentYear - i).toString());
+  const yearOptions = Array.from({ length: 4 }, (_, i) => (currentYear - i).toString());
 
   return (
     <div>
