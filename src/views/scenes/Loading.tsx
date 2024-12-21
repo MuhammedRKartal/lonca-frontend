@@ -4,7 +4,7 @@ import { Box, LinearProgress } from "@mui/material";
 export const Loading = () => {
   return (
     <Box sx={{ width: "100%", mt: 1, height: "80vh" }}>
-      <LinearProgress />
+      <LinearProgress color="success" />
     </Box>
   );
 };
